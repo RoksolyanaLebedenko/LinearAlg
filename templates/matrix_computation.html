@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Matrix Computation</title>
+        <!-- This is the way flask handles links to css files,
+        it has to be this way because all named variables in flask code will change it's style too -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+             tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+         });
+        </script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script src="{{url_for('static', filename='main.js')}}"></script>
+    </head>
+    <body>
+    <div id="wrapper">
+       <header>
+        <h1>Linear algebra</h1>
+
+    </header>
+
+        <div id="matrix">
+            <div class="matrix-computation">
+                {% if username %}
+                    <p>Hello {{ username }}</p>
+                {% else %}
+                    <p>Hello Stranger</p>
+                {% endif %}
+                <div class="matrix-size">
+                    <p>Matrix size:</p>
+                    <input type="text" name="column" class="input-size column-size"> x <input type="text" name="row" class="input-size row-size">
+                    <button type="button" name="ok" class="submit-size">OK</button>
+                </div>
+
+                     <div class="created-matrix">
+                         
+                    </div>
+                <br><form method="post" action="/matrix-computation">
+                    <label for="matrix-text-area">Please enter matrix:</label><br>
+                    <textarea name="Matrix text area" rows="2" cols="2" id="matrix-text-area">
+                        {% if new_matrix is defined %} {{ matrix }} {% endif %}
+                    </textarea><br>
+
+                </form>
+            </div>
+            {% if new_matrix is defined %}
+                <p>Solution: {{new_matrix}}</p>
+            {% endif %}
+        </div>
+        <section id="main">
+        <h1>Solving Ax = b via LU-factorization</h1>
+        <p>If <b><i>A = LU</i></b>, then <b><i>Ax = LUx = b </i></b>. Thus, first solve <b><i>Ly = b</i></b>, for <b><i>y</i></b>,
+            then solve <b><i>Ux = y</i></b> for <b><i>x</i></b>. Both solutions are found by back-substitution.</p>
+    </section>
+
+
+    <aside>
+        <h1>Useful information</h1>
+        <p><b>LU-factorization</b> factors a matrix as the product of a lower triangular matrix and an upper triangular
+            matrix.
+            The LU-factorization can be viewed as the matrix form of Gaussian elimination.</p>
+    </aside>
+         <div class="team">
+               <p class="team-header">Team:</p>
+               <p class="team-name" >Max Karpinsky,  Dmitry Kushnir,  Katya Mohylevska,  Oleg Balenko,  Roksolyana Lebedenko.</p>
+           </div>
+        </div>
+
+    </body>
+</html>

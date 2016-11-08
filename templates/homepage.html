@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <!-- This is the way flask handles links to css files,
+        it has to be this way because all named variables in flask code will change it's style too -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+        <header><h1>{{ header }}</h1></header>
+    </body>
+</html>
